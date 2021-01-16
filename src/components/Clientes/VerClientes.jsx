@@ -8,10 +8,11 @@ import _ from 'lodash';
 function VerClientes({ users,getClientes, ...props }) {
 
   useEffect(() => {
-    if(_.isEmpty(users)){
+    if(_.isEmpty(users.users)){
       getClientes();
     }
   }, [users, getClientes]);
+  
   return (
     <div className='page-content-wrapper'>
       <div className='page-content'>
@@ -66,11 +67,11 @@ function VerClientes({ users,getClientes, ...props }) {
                     <tbody>
                       { _.map(users.users, (user, index) => {
                         return (
-                          <tr className='odd gradeX' keu={index}>
+                          <tr className='odd gradeX' key={index}>
                             <td className='user-circle-img'>
                               <img src='assets/img/user/user1.jpg' alt='' />
                             </td>
-                            <td className='center'>{user.name}</td>
+                            <td className='center'>{user.name}as</td>
                             <td className='center'>{user.email}</td>
                             <td className='center'>
                               <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>

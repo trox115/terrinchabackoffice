@@ -23,6 +23,7 @@ export default {
         const response = await get(apiUrls.clientes);
         if (response && response.status === 200) {
 //          await this.setClientes(response)
+console.log(response)
             this.setUsers(response.data);
 //          this.setLoading(false);
         }

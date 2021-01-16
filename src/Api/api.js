@@ -27,6 +27,7 @@ export async function patch(url, payload) {
 }
 
 export async function get(url) {
+  console.log(url)
   const response = await doRequest(url, {}, 'get');
   return response;
 }
