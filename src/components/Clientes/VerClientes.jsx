@@ -1,12 +1,17 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-function VerClientes({ users, ...props }) {
-  useEffect(() => {}, []);
+function VerClientes({ users,getClientes, ...props }) {
+
+  useEffect(() => {
+    if(_.isEmpty(users)){
+      getClientes();
+    }
+  }, [users, getClientes]);
   return (
     <div className='page-content-wrapper'>
       <div className='page-content'>
@@ -59,9 +64,9 @@ function VerClientes({ users, ...props }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {_.map(users, (user) => {
+                      { _.map(users.users, (user, index) => {
                         return (
-                          <tr className='odd gradeX'>
+                          <tr className='odd gradeX' keu={index}>
                             <td className='user-circle-img'>
                               <img src='assets/img/user/user1.jpg' alt='' />
                             </td>
@@ -94,4 +99,9 @@ const mapState = (state) => ({
   users: state.users,
 });
 
-export default connect(mapState, null)(VerClientes);
+const mapDispatch = dispatch => ({
+  getClientes: () => dispatch.users.loadClientes(),
+  changeFilterSlider: obj => dispatch.users.changeFilterSlider(obj)
+});
+
+export default connect(mapState, mapDispatch)(VerClientes);
