@@ -1,6 +1,8 @@
 export const apiUrls = {
-    // AUTH
+    // Clientes
     clientes:  '/clientes',
+    //Casas
+    casas: '/casas/index'
   };
   
   export const replaceUrls = (url, obj) => {

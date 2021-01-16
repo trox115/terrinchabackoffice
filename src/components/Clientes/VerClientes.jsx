@@ -9,6 +9,7 @@ function VerClientes({ users,getClientes, ...props }) {
 
   useEffect(() => {
     if(_.isEmpty(users.users)){
+      console.log(1)
       getClientes();
     }
   }, [users, getClientes]);

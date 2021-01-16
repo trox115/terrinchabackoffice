@@ -5,30 +5,30 @@ import _ from 'lodash';
 
 export default {
   state: {
-    users: [],
+    casas: [],
   },
 
   reducers: {
-    loaded: ( state, payload) => payload,
-    setUsers(state, payload) {
-      return { ...state, users: payload };
+    loaded: (state, payload) => payload,
+    setCasas(state, payload) {
+      return { ...state, casas: payload };
     },
   },
 
   effects: (dispatch) => ({
-
-    async loadClientes(payload, state) {
+    async loadCasas(payload, state) {
       try {
         //this.setLoading(true);
-        const response = await get(apiUrls.clientes);
+        const response = await get(apiUrls.casas);
         if (response && response.status === 200) {
-//          await this.setClientes(response)
-            this.setUsers(response.data);
-//          this.setLoading(false);
+          //          await this.setClientes(response)
+          console.log(response);
+          this.setCasas(response.data);
+          //          this.setLoading(false);
         }
       } catch (error) {
         //TODO: HANDLE ERROR
       }
     },
-  })
+  }),
 };
