@@ -1,6 +1,15 @@
-import React from 'react'
+/* eslint-disable no-script-url */
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
-export default function VerClientes() {
+function VerClientes({users, ...props }) {
+  useEffect(() => {
+
+  }, [])
+console.log(users);
   return (
     <div className="page-content-wrapper">
       <div className="page-content">
@@ -41,12 +50,15 @@ export default function VerClientes() {
                       </tr>
                     </thead>
                     <tbody>
-                    <tr className="odd gradeX">
+                    
+                        {
+                          _.map(users, user => {
+                            return (<tr className="odd gradeX">
                         <td className="user-circle-img">
                           <img src="assets/img/user/user1.jpg" alt="" />
                         </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
+                        <td className="center">{ user.name }</td>
+                        <td className="center">{ user.email }</td>
                         <td className="center">
                           <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
                             <i className="fa fa-pencil"></i>
@@ -55,172 +67,11 @@ export default function VerClientes() {
                             <i className="fa fa-trash-o "></i>
                           </button>
                         </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">test@gmail.com </td>
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
+                      </tr>)
+                          })
+                        }
+                        
+                      
                       
                     </tbody>
                   </table>
@@ -234,3 +85,9 @@ export default function VerClientes() {
 
   )
 }
+
+const mapState = state => ({
+  users: state.users
+});
+
+export default connect(mapState, null)(VerClientes)
