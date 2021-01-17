@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-function VerProdutos({produtos, getProdutos}) {
+function VerProdutos({ produtos, getProdutos }) {
 
   useEffect(() => {
-    if(_.isEmpty(produtos.produtos)){
+    if (_.isEmpty(produtos.produtos)) {
       console.log(1)
       getProdutos();
     }
@@ -60,28 +60,28 @@ function VerProdutos({produtos, getProdutos}) {
                       <tbody>
                         {
                           _.map(produtos.produtos, (produto) => {
-                            return(
-<tr>
-                          <td key={produto.id}>{produto.id}</td>
-                          <td>{produto.nome}</td>
-                          <td>
-                          {produto.descricao}
-                          </td>
-                          <td>{produto.ano}</td>
-                          <td>{produto.preco} €</td>
-                          <td>
-                            <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                              <i className='fa fa-pencil'></i>
-                            </a>
-                            <button className='btn btn-tbl-delete btn-xs'>
-                              <i className='fa fa-trash-o '></i>
-                            </button>
-                          </td>
-                        </tr>
+                            return (
+                              <tr>
+                                <td key={produto.id}>{produto.id}</td>
+                                <td>{produto.nome}</td>
+                                <td>
+                                  {produto.descricao}
+                                </td>
+                                <td>{produto.ano}</td>
+                                <td>{produto.preco} €</td>
+                                <td>
+                                  <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
+                                    <i className='fa fa-pencil'></i>
+                                  </a>
+                                  <button className='btn btn-tbl-delete btn-xs'>
+                                    <i className='fa fa-trash-o '></i>
+                                  </button>
+                                </td>
+                              </tr>
                             )
                           })
                         }
-                        
+
                       </tbody>
                     </table>
                   </div>
