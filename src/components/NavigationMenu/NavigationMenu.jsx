@@ -260,9 +260,9 @@ export default function NavigationMenu() {
                   </Link>
                 </li>
                 <li className='nav-item'>
-                  <a href='add_room.html' className='nav-link '>
+                  <Link to='/novoContacto' className='nav-link '>
                     <span className='title'>Novo</span>
-                  </a>
+                  </Link>
                 </li>
 
               </ul>

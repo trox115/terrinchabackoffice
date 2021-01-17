@@ -62,7 +62,6 @@ function VerCasas({casas, getCasas}) {
 
                             {
                               _.map(casas.casas, (casa, index) => {
-                                console.log(casa)
                                 return (
                                   <tr key={index}>
                               <td>{index}</td>

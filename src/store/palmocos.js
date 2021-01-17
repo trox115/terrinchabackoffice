@@ -20,10 +20,8 @@ export default {
       try {
         //this.setLoading(true);
         const response = await get(apiUrls.palmocos);
-        console.log(response)
         if (response && response.status === 200) {
           //          await this.setClientes(response)
-          console.log(response);
           this.setPalmocos(response.data);
           //          this.setLoading(false);
         }

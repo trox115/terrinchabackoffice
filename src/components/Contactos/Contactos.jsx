@@ -1,3 +1,6 @@
+/* eslint-disable no-script-url */
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import _ from 'lodash'
@@ -10,7 +13,6 @@ function Contactos({ getContactos, contactos }) {
     }
   }, [contactos, getContactos])
 
-  console.log(contactos)
   return (
     <div className="page-content-wrapper">
       <div className="page-content">

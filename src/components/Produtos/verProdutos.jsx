@@ -6,10 +6,8 @@ function VerProdutos({ produtos, getProdutos }) {
 
   useEffect(() => {
     if (_.isEmpty(produtos.produtos)) {
-      console.log(1)
       getProdutos();
     }
-    console.log(produtos)
   }, [produtos, getProdutos]);
 
   return (

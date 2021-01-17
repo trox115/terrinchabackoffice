@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 function VerMenus({menus, getMenus}) {
-  console.log(menus)
   useEffect(() => {
     if(_.isEmpty(menus.menus)){
       getMenus();

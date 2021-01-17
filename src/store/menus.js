@@ -20,11 +20,8 @@ export default {
       try {
         //this.setLoading(true);
         const response = await get(apiUrls.menus);
-        console.log(response)
-        console.log(response)
         if (response && response.status === 200) {
           //          await this.setClientes(response)
-          console.log(response);
           this.setMenus(response.data);
           //          this.setLoading(false);
         }

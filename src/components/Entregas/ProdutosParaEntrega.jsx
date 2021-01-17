@@ -8,7 +8,6 @@ function ProdutosParaEntrega({entregas, getEntregas}) {
     if(_.isEmpty(entregas.entregas)){
       getEntregas();
     }
-    console.log(entregas)
   }, [entregas, getEntregas]);
     return (
         <div className="page-content-wrapper">

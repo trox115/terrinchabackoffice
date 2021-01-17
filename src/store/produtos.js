@@ -22,7 +22,6 @@ export default {
         const response = await get(apiUrls.produtos);
         if (response && response.status === 200) {
           //          await this.setClientes(response)
-          console.log(response);
           this.setProdutos(response.data);
           //          this.setLoading(false);
         }

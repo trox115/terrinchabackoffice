@@ -40,7 +40,6 @@ async function doRequest(url, payload, method) {
     },
     data: payload,
   };
-  console.log(config, config.url.split('?')[0])
   try {
     const response = await once(config, config.url.split('?')[0]);
     return response;
