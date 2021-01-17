@@ -3,9 +3,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
-import _ from 'lodash'
+import { Link } from 'react-router-dom';
+import _  from 'lodash'
 
-function Contactos({ getContactos, contactos }) {
+function Contactos({ getContactos, contactos, removeContactos }) {
   useEffect(() => {
 
     if (_.isEmpty(contactos.contactos)) {
@@ -13,6 +14,9 @@ function Contactos({ getContactos, contactos }) {
     }
   }, [contactos, getContactos])
 
+  const apagar = (id) => {
+    removeContactos({id})
+    }
   return (
     <div className="page-content-wrapper">
       <div className="page-content">
@@ -62,10 +66,10 @@ function Contactos({ getContactos, contactos }) {
                             <td className="center">{contacto.nome}</td>
                             <td className="center">{contacto.telefone}</td>
                             <td className="center">
-                              <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
+                              <Link to={{pathname: 'editarContacto', query:contacto}} className="btn btn-tbl-edit btn-xs" name={contacto.nome}>
                                 <i className="fa fa-pencil"></i>
-                              </a>
-                              <button className="btn btn-tbl-delete btn-xs">
+                              </Link>
+                              <button className="btn btn-tbl-delete btn-xs" onClick={() => apagar(contacto.id)}>
                                 <i className="fa fa-trash-o "></i>
                               </button>
                             </td>
@@ -92,6 +96,7 @@ const mapState = (state) => ({
 
 const mapDispatch = dispatch => ({
   getContactos: () => dispatch.contactos.loadContactos(),
+  removeContactos: (obj) => dispatch.contactos.apagarContacto(obj)
 });
 
 export default connect(mapState, mapDispatch)(Contactos)

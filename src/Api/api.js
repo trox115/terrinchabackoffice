@@ -31,6 +31,11 @@ export async function get(url) {
   return response;
 }
 
+export async function remove(url) {
+  const response = await doRequest(url, {}, 'delete');
+  return response;
+}
+
 async function doRequest(url, payload, method) {
   const config = {
     url: process.env.REACT_APP_BASE_URL + url,

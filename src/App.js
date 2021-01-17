@@ -19,6 +19,8 @@ import VerEntregas from './components/Entregas/verEntregas';
 import ProdutosParaEntrega from './components/Entregas/ProdutosParaEntrega';
 import VerContactos from './components/Contactos/Contactos';
 import NovoContacto from './components/Contactos/NovoContacto';
+import EditarContactos from './components/Contactos/EditarContactos';
+
 
 
 function App() {
@@ -43,6 +45,7 @@ function App() {
               <Route exact path='/ProdutosParaEntrega' component={ProdutosParaEntrega} />
               <Route exact path='/verContactos' component={VerContactos} />
               <Route exact path='/novoContacto' component={NovoContacto} />
+              <Route exact path='/editarContacto' component={EditarContactos} />
             </Switch>
           </div>
         </div>

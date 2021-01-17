@@ -17,7 +17,9 @@ export const apiUrls = {
     entregas: '/entregas',
     // Contactos
     contactos: '/contactos',
-    novocontacto:'/contactos/create'
+    novocontacto:'/contactos/create',
+    editarcontacto: '/contactos/patch/:id',
+    apagarContacto: '/contactos/delete/:id'
   };
   
   export const replaceUrls = (url, obj) => {
