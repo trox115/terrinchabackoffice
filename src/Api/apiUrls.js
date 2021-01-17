@@ -6,7 +6,9 @@ export const apiUrls = {
     //Produtos
     produtos: '/produtos/index',
     //Encomendas
-    encomendas: '/encomendas'
+    encomendas: '/encomendas',
+    //Atividades
+    atividades: '/atividades'
   };
   
   export const replaceUrls = (url, obj) => {

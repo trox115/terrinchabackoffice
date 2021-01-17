@@ -13,7 +13,7 @@ function VerCasas({casas, getCasas}) {
       getCasas();
     }
   }, [casas, getCasas]);
-  console.log(casas)
+
     return (
         <div className="page-content-wrapper">
       <div className="page-content">

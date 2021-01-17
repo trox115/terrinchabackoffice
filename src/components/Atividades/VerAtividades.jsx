@@ -1,9 +1,16 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React from 'react'
+import React, { useEffect } from 'react'
+import {connect } from 'react-redux';
+import _ from 'lodash';
 
-export default function VerAtividades() {
+function VerAtividades({atividades, getAtividades}) {
+  useEffect(() => {
+    if(_.isEmpty(atividades.atividades)){
+      getAtividades();
+    }
+  }, [atividades, getAtividades]);
   return (
     <div className="page-content-wrapper">
       <div className="page-content">
@@ -48,60 +55,38 @@ export default function VerAtividades() {
                       </tr>
                     </thead>
                     <tbody>
-                    <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">1</td>
-                        <td className="center">Prova Rústica</td>
-                        <td className="center">Pão Regional
-                        Água Mineral
-                        Queijo de ovelha Terrincha Meia Cura
-                        Azeite Virgem Extra
-                        Vinho Quinta da Terrincha Doc Douro Branco
-                        Vinho Quinta da Terrincha Doc Douro Rosé
-                        Vinho Quinta da Terrincha Doc Douro Tinto
-Vinho Terras da Vilariça Doc Douro Tinto</td>
-                        <td className="center">10 €</td>
-
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">2</td>
-                        <td className="center">Prova Vintage</td>
-                        <td className="center">Pão Regional
-Bola de Carne Caseira
-Água Mineral
-Variedade de Compotas da Terrincha
-Queijo de ovelha Terrincha Meia Cura
-Azeite Virgem Extra
-Vinho Quinta da Terrincha Doc Douro Branco
-Vinho Quinta da Terrincha Doc Douro Rosé
-Vinho Quinta da Terrincha Doc Douro Tinto
-Vinho Quinta da Terrincha Tinto Lote T14</td>
-                        <td className="center">15 €</td>
-
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-
-
+                      {
+                        _.map(atividades.atividades, (atividade) => {
+                          return(
+                            <tr className="odd gradeX" key={atividade.id}>
+                            <td className="user-circle-img">
+                              <img src="assets/img/user/user1.jpg" alt="" />
+                            </td>
+                            <td className="center">{atividade.id}</td>
+                            <td className="center">{atividade.nome}</td>
+                            <td className="center">
+                              {
+                                _.map(atividade.itens, (item, index) => {
+                                  return(
+                                    <span key={index}>{item}, </span>
+                                  )
+                                })
+                              }
+                              </td>
+                            <td className="center">{atividade.preco} €</td>
+    
+                            <td className="center">
+                              <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
+                                <i className="fa fa-pencil"></i>
+                              </a>
+                              <button className="btn btn-tbl-delete btn-xs">
+                                <i className="fa fa-trash-o "></i>
+                              </button>
+                            </td>
+                          </tr>
+                          )
+                        })
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -114,3 +99,12 @@ Vinho Quinta da Terrincha Tinto Lote T14</td>
 
   )
 }
+const mapState = (state) => ({
+  atividades: state.atividades,
+});
+
+const mapDispatch = dispatch => ({
+  getAtividades: () => dispatch.atividades.loadAtividades(),
+});
+
+export default connect(mapState, mapDispatch)(VerAtividades)
