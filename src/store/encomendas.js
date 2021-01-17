@@ -5,30 +5,29 @@ import _ from 'lodash';
 
 export default {
   state: {
-    users: [],
+    encomendas: [],
   },
 
   reducers: {
-    loaded: ( state, payload) => payload,
-    setUsers(state, payload) {
-      return { ...state, users: payload };
+    loaded: (state, payload) => payload,
+    setEncomendas(state, payload) {
+      return { ...state, encomendas: payload };
     },
   },
 
   effects: (dispatch) => ({
-
-    async loadClientes(payload, state) {
+    async loadEncomendas(payload, state) {
       try {
         //this.setLoading(true);
-        const response = await get(apiUrls.clientes);
+        const response = await get(apiUrls.encomendas);
         if (response && response.status === 200) {
-//          await this.setClientes(response)
-            this.setUsers(response.data);
-//          this.setLoading(false);
+          //          await this.setClientes(response)
+          this.setEncomendas(response.data);
+          //          this.setLoading(false);
         }
       } catch (error) {
         //TODO: HANDLE ERROR
       }
     },
-  })
+  }),
 };

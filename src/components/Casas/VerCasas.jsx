@@ -1,6 +1,19 @@
-import React from 'react'
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+import classNames from 'classnames';
 
-export default function VerCasas() {
+
+function VerCasas({casas, getCasas}) {
+
+  useEffect(() => {
+    if(_.isEmpty(casas.casas)){
+      getCasas();
+    }
+  }, [casas, getCasas]);
+
     return (
         <div className="page-content-wrapper">
       <div className="page-content">
@@ -46,15 +59,26 @@ export default function VerCasas() {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>Casa do Jardineiro</td>
+
+                            {
+                              _.map(casas.casas, (casa, index) => {
+                                console.log(casa)
+                                return (
+                                  <tr key={index}>
+                              <td>{index}</td>
+                              <td>{casa.nome}</td>
                               <td>
-                              <span className='label label-sm label-danger'></span>
+                              <span className={classNames ({
+                                'label label-sm label-danger': !casa.limpa || casa.ocupada,
+                                'label label-sm label-success': casa.limpa && !casa.ocupada
+                                })}></span>
                               </td>
 
                               <td>
-                              <span className='label label-sm label-success'>Limpa</span>
+                              <span className={classNames({
+                                'label label-sm label-success' : casa.limpa,
+                                'label label-sm label-danger': !casa.limpa
+                                })}>{casa.limpa ? 'Limpa' : 'Suja' }</span>
                               </td>
                               <td>
                                 <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
@@ -65,277 +89,11 @@ export default function VerCasas() {
                                 </button>
                               </td>
                             </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>Casa da criada</td>
-                              
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-warning'>A limpar </span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>Casa do azeiteiro</td>
-                              <td>
-                              <span className='label label-sm label-danger'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-success '>Limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>4</td>
-                              <td>Casa do Ceifeiro</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>Não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>5</td>
-                              <td>Casa do Podador</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-success '>Limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>6</td>
-                              <td>Casa do caseiro</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-warning '>A Limpar</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>7</td>
-                              <td>Casa do Guarda</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-success '>Limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>8</td>
-                              <td>Casa do Pastor</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>9</td>
-                              <td>Casa da Palhas</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>10</td>
-                              <td>Casa dos Bois</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>11</td>
-                              <td>Casa do enxertador</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                              <tr>
-                              <td>12</td>
-                              <td>Casa da Eira</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>13</td>
-                              <td>Casa da Francela</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>14</td>
-                              <td>Casa da Lenha</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>15</td>
-                              <td>Casa dos Cavalos</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>16</td>
-                              <td>Casa Mãe</td>
-                              <td>
-                              <span className='label label-sm label-success'></span>
-                              </td>
-                              <td>
-                                <span className='label label-sm label-danger'>não limpa</span>
-                              </td>
-                              <td>
-                                <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                                  <i className='fa fa-pencil'></i>
-                                </a>
-                                <button className='btn btn-tbl-delete btn-xs'>
-                                  <i className='fa fa-trash-o '></i>
-                                </button>
-                              </td>
-                            </tr>
+                                )
+                              })
+                            }
+                            
+                            
                           </tbody>
                         </table>
                       </div>
@@ -348,3 +106,12 @@ export default function VerCasas() {
             </div>
     )
 }
+const mapState = (state) => ({
+  casas: state.casas,
+});
+
+const mapDispatch = dispatch => ({
+  getCasas: () => dispatch.casas.loadCasas(),
+});
+
+export default connect(mapState, mapDispatch)(VerCasas);

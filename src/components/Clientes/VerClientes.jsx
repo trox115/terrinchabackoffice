@@ -5,8 +5,15 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-function VerClientes({ users, ...props }) {
-  useEffect(() => {}, []);
+function VerClientes({ users,getClientes, ...props }) {
+
+  useEffect(() => {
+    if(_.isEmpty(users.users)){
+      console.log(1)
+      getClientes();
+    }
+  }, [users, getClientes]);
+  
   return (
     <div className='page-content-wrapper'>
       <div className='page-content'>
@@ -59,13 +66,13 @@ function VerClientes({ users, ...props }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {_.map(users, (user) => {
+                      { _.map(users.users, (user, index) => {
                         return (
-                          <tr className='odd gradeX'>
+                          <tr className='odd gradeX' key={index}>
                             <td className='user-circle-img'>
                               <img src='assets/img/user/user1.jpg' alt='' />
                             </td>
-                            <td className='center'>{user.name}</td>
+                            <td className='center'>{user.name}as</td>
                             <td className='center'>{user.email}</td>
                             <td className='center'>
                               <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
@@ -94,4 +101,9 @@ const mapState = (state) => ({
   users: state.users,
 });
 
-export default connect(mapState, null)(VerClientes);
+const mapDispatch = dispatch => ({
+  getClientes: () => dispatch.users.loadClientes(),
+  changeFilterSlider: obj => dispatch.users.changeFilterSlider(obj)
+});
+
+export default connect(mapState, mapDispatch)(VerClientes);

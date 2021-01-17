@@ -1,6 +1,26 @@
-import React from 'react'
+/* eslint-disable no-script-url */
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
-export default function VerEncomendas() {
+function VerEncomendas({ getEncomendas, encomendas, produtos, getProdutos, users, getClientes }) {
+
+  useEffect(async () => {
+    if (_.isEmpty(produtos.produtos)) {
+      await getProdutos();
+    }
+
+    if (_.isEmpty(users.users)) {
+      await getClientes();
+    }
+    if (_.isEmpty(encomendas.encomendas)) {
+      getEncomendas();
+    }
+
+  }, [encomendas, getEncomendas, users, getClientes, produtos, getProdutos]);
+
   return (
     <div className="page-content-wrapper">
       <div className="page-content">
@@ -44,26 +64,34 @@ export default function VerEncomendas() {
                       </tr>
                     </thead>
                     <tbody>
-                    <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">António Fernandes</td>
-                        <td className="center">Terrincha Reserva	 </td>
-                        <td className="center">3</td>
-                        <td className="center">12 €</td>
 
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                     
-                      
+                      {
+                        _.map(encomendas.encomendas, (encomenda) => {
+                          const userIndex = _.findIndex(users.users, { id: encomenda.cliente_id })
+                          const productIndex = _.findIndex(produtos.produtos, { id: encomenda.produto_id })
+                          const total = produtos.produtos[productIndex].preco * encomenda.quantidade
+                          return (
+                            <tr className="odd gradeX">
+                              <td className="user-circle-img">
+                                <img src="assets/img/user/user1.jpg" alt="" />
+                              </td>
+                              <td className="center">{users.users[userIndex].name}</td>
+                              <td className="center">{produtos.produtos[productIndex].nome}	 </td>
+                              <td className="center">{encomenda.quantidade}</td>
+                              <td className="center">{total} €</td>
+
+                              <td className="center">
+                                <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
+                                  <i className="fa fa-pencil"></i>
+                                </a>
+                                <button className="btn btn-tbl-delete btn-xs">
+                                  <i className="fa fa-trash-o "></i>
+                                </button>
+                              </td>
+                            </tr>
+                          )
+                        })
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -76,3 +104,17 @@ export default function VerEncomendas() {
 
   )
 }
+
+const mapState = (state) => ({
+  encomendas: state.encomendas,
+  produtos: state.produtos,
+  users: state.users
+});
+
+const mapDispatch = dispatch => ({
+  getEncomendas: () => dispatch.encomendas.loadEncomendas(),
+  getProdutos: () => dispatch.produtos.loadProdutos(),
+  getClientes: () => dispatch.users.loadClientes()
+});
+
+export default connect(mapState, mapDispatch)(VerEncomendas);

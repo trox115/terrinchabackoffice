@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
-export default function verProdutos() {
+function VerProdutos({ produtos, getProdutos }) {
+
+  useEffect(() => {
+    if (_.isEmpty(produtos.produtos)) {
+      console.log(1)
+      getProdutos();
+    }
+    console.log(produtos)
+  }, [produtos, getProdutos]);
+
   return (
     <div className="page-content-wrapper">
       <div className="page-content">
@@ -47,143 +58,30 @@ export default function verProdutos() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Quinta da Terrincha</td>
-                          <td>
-                          Doc Douro Tinto	
-                          </td>
-                          <td>2013</td>
-                          <td>7 €</td>
-                          <td>
-                            <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                              <i className='fa fa-pencil'></i>
-                            </a>
-                            <button className='btn btn-tbl-delete btn-xs'>
-                              <i className='fa fa-trash-o '></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Terrincha</td>
-                          <td>
-                            DOC douro Branco
-                          </td>
-                          <td>2018</td>
-                          <td>7 €</td>
-                          <td>
-                            <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                              <i className='fa fa-pencil'></i>
-                            </a>
-                            <button className='btn btn-tbl-delete btn-xs'>
-                              <i className='fa fa-trash-o '></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>Terrincha</td>
-                          <td>
-                            DOC Douro Rosé
-                          </td>
-                          <td>2018</td>
-                          <td>6 €</td>
-                          <td>
-                            <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                              <i className='fa fa-pencil'></i>
-                            </a>
-                            <button className='btn btn-tbl-delete btn-xs'>
-                              <i className='fa fa-trash-o '></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>Terras da vilariça</td>
-                          <td>
-                            DOC Douro Tinto
-                          </td>
-                          <td>2015</td>
-                          <td>6 €</td>
-                          <td>
-                            <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                              <i className='fa fa-pencil'></i>
-                            </a>
-                            <button className='btn btn-tbl-delete btn-xs'>
-                              <i className='fa fa-trash-o '></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>5</td>
-                          <td>Terrincha Reserva</td>
-                          <td>
-                            Doc Douro Tinto
-                          </td>
-                          <td>2016</td>
-                          <td>12 €</td>
-                          <td>
-                            <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                              <i className='fa fa-pencil'></i>
-                            </a>
-                            <button className='btn btn-tbl-delete btn-xs'>
-                              <i className='fa fa-trash-o '></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>6</td>
-                          <td>Quinta da Terrincha</td>
-                          <td>
-                            DOC Douro Branco
-                          </td>
-                          <td>LT-15 2015	</td>
-                          <td>15 €</td>
-                          <td>
-                            <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                              <i className='fa fa-pencil'></i>
-                            </a>
-                            <button className='btn btn-tbl-delete btn-xs'>
-                              <i className='fa fa-trash-o '></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>7</td>
-                          <td>Terrincha</td>
-                          <td>
-                            DOC Douro Branco
-                          </td>
-                          <td>B-16 2016		</td>
-                          <td>15 €</td>
-                          <td>
-                            <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                              <i className='fa fa-pencil'></i>
-                            </a>
-                            <button className='btn btn-tbl-delete btn-xs'>
-                              <i className='fa fa-trash-o '></i>
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>8</td>
-                          <td>Terrincha Reserva	</td>
-                          <td>
-                          DOC Douro Branco
-                          </td>
-                          <td>2015	</td>
-                          <td>25 €</td>
-                          <td>
-                            <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
-                              <i className='fa fa-pencil'></i>
-                            </a>
-                            <button className='btn btn-tbl-delete btn-xs'>
-                              <i className='fa fa-trash-o '></i>
-                            </button>
-                          </td>
-                        </tr>
-                        
+                        {
+                          _.map(produtos.produtos, (produto) => {
+                            return (
+                              <tr>
+                                <td key={produto.id}>{produto.id}</td>
+                                <td>{produto.nome}</td>
+                                <td>
+                                  {produto.descricao}
+                                </td>
+                                <td>{produto.ano}</td>
+                                <td>{produto.preco} €</td>
+                                <td>
+                                  <a href='edit_booking.html' className='btn btn-tbl-edit btn-xs'>
+                                    <i className='fa fa-pencil'></i>
+                                  </a>
+                                  <button className='btn btn-tbl-delete btn-xs'>
+                                    <i className='fa fa-trash-o '></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            )
+                          })
+                        }
+
                       </tbody>
                     </table>
                   </div>
@@ -196,3 +94,12 @@ export default function verProdutos() {
     </div>
   )
 }
+const mapState = (state) => ({
+  produtos: state.produtos,
+});
+
+const mapDispatch = dispatch => ({
+  getProdutos: () => dispatch.produtos.loadProdutos(),
+});
+
+export default connect(mapState, mapDispatch)(VerProdutos);
