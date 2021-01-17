@@ -6,6 +6,7 @@ import {connect } from 'react-redux';
 import _ from 'lodash';
 
 function VerAtividades({atividades, getAtividades}) {
+  
   useEffect(() => {
     if(_.isEmpty(atividades.atividades)){
       getAtividades();

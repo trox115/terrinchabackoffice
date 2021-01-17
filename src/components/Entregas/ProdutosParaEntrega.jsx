@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
-export default function ProdutosParaEntrega() {
+function ProdutosParaEntrega({menus, getMenus}) {
+
+  useEffect(() => {
+    if(_.isEmpty(menus.menus)){
+      getMenus();
+    }
+    console.log(menus)
+  }, [menus, getMenus]);
     return (
         <div className="page-content-wrapper">
       <div className="page-content">
@@ -112,3 +121,13 @@ export default function ProdutosParaEntrega() {
     </div>
     )
 }
+
+const mapState = (state) => ({
+  menus: state.menus,
+});
+
+const mapDispatch = dispatch => ({
+  getMenus: () => dispatch.menus.loadMenus(),
+});
+
+export default connect(mapState, mapDispatch)(ProdutosParaEntrega);

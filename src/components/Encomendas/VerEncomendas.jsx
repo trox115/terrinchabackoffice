@@ -7,18 +7,18 @@ import _ from 'lodash';
 
 function VerEncomendas({ getEncomendas, encomendas, produtos, getProdutos, users, getClientes }) {
 
-  useEffect(() => {
+  useEffect(async () => {
+    if (_.isEmpty(produtos.produtos)) {
+      await getProdutos();
+    }
+
+    if (_.isEmpty(users.users)) {
+      await getClientes();
+    }
     if (_.isEmpty(encomendas.encomendas)) {
       getEncomendas();
     }
 
-    if (_.isEmpty(produtos.produtos)) {
-      getProdutos();
-    }
-
-    if (_.isEmpty(users.users)) {
-      getClientes();
-    }
   }, [encomendas, getEncomendas, users, getClientes, produtos, getProdutos]);
 
   return (

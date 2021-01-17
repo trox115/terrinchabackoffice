@@ -27,7 +27,6 @@ export async function patch(url, payload) {
 }
 
 export async function get(url) {
-  console.log(url)
   const response = await doRequest(url, {}, 'get');
   return response;
 }
@@ -41,10 +40,9 @@ async function doRequest(url, payload, method) {
     },
     data: payload,
   };
-
+  console.log(config, config.url.split('?')[0])
   try {
     const response = await once(config, config.url.split('?')[0]);
-
     return response;
   } catch (error) {
     const { response } = error;

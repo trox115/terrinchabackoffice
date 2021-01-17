@@ -8,7 +8,11 @@ export const apiUrls = {
     //Encomendas
     encomendas: '/encomendas',
     //Atividades
-    atividades: '/atividades'
+    atividades: '/atividades',
+    //Pequenos Almoços
+    palmocos:'/palmocos',
+    // Menus de degustação
+    menus: '/degustacao',
   };
   
   export const replaceUrls = (url, obj) => {

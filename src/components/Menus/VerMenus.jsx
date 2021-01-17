@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
-export default function VerMenus() {
+function VerMenus({menus, getMenus}) {
+  console.log(menus)
+  useEffect(() => {
+    if(_.isEmpty(menus.menus)){
+      getMenus();
+    }
+  }, [menus, getMenus]);
     return (
         <div className="page-content-wrapper">
         <div className="page-content">
@@ -49,18 +57,54 @@ export default function VerMenus() {
                         </tr>
                       </thead>
                       <tbody>
-                      <tr className="odd gradeX">
+
+                        {
+                          _.map(menus.menus, (menu, index) => {
+                            return(
+                  <tr className="odd gradeX" key={menu.id}>
                           <td className="user-circle-img">
                             <img src="assets/img/user/user1.jpg" alt="" />
                           </td>
-                          <td className="center">1</td>
-                          <td className="center">Proposta 1</td>
-                          <td className="center">Entradas Regionais</td>
+                          <td className="center">{index}</td>
+                          <td className="center">{menu.nome}</td>
+                          <td className="center">{
+                            _.map(menu.entradas, (entrada) => {
+                              return(
+                                <span>{entrada} \ </span>
+                              )
+                            })
+                            }
+                          
+                          
+                          </td>
 
-                          <td className="center">Arroz de Pato com laranja/ Bacalhau Assado</td>
-                          <td className="center">Doces/ Fruta da Época</td>
-                          <td className="center">Tinto Terrincha Colheita, Terrincha Rosé Terrincha Branco, Águas, Refrigerantes, Café</td>
-                          <td> 30 e</td>
+                          <td className="center">
+                          {
+                            _.map(menu.principais, (principal) => {
+                              return(
+                                <span>{principal} \ </span>
+                              )
+                            })
+                            }
+                          
+                          </td>
+                          <td className="center">{
+                            _.map(menu.sobremesas, (sobremesa) => {
+                              return(
+                                <span>{sobremesa} \</span>
+                              )
+                            })
+                            }
+                          </td>
+                          <td className="center">{
+                            _.map(menu.bebidas, (bebida) => {
+                              return(
+                                <span>{bebida} \ </span>
+                              )
+                            })
+                            }
+                          </td>
+                          <td>{menu.preco} </td>
 
   
                           <td className="center">
@@ -72,30 +116,9 @@ export default function VerMenus() {
                             </button>
                           </td>
                         </tr>
-                        <tr className="odd gradeX">
-                          <td className="user-circle-img">
-                            <img src="assets/img/user/user1.jpg" alt="" />
-                          </td>
-                          <td className="center">2</td>
-                          <td className="center">Proposta 2</td>
-                          <td className="center">Entradas Regionais</td>
-
-                          <td className="center">Posta Vitela/Polvo Afogado em Azeite</td>
-                          <td className="center">Doces/ Fruta da Época</td>
-                          <td className="center">Tinto Terrincha Colheita, Terrincha Rosé Terrincha Branco, Águas, Refrigerantes, Café</td>
-                          <td className="center">35 €</td>
-
-  
-                          <td className="center">
-                            <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                              <i className="fa fa-pencil"></i>
-                            </a>
-                            <button className="btn btn-tbl-delete btn-xs">
-                              <i className="fa fa-trash-o "></i>
-                            </button>
-                          </td>
-                        </tr>
-                       
+                            )
+                          })
+                        }
                         
                       </tbody>
                     </table>
@@ -108,3 +131,13 @@ export default function VerMenus() {
       </div>
     )
 }
+
+const mapState = (state) => ({
+  menus: state.menus,
+});
+
+const mapDispatch = dispatch => ({
+  getMenus: () => dispatch.menus.loadMenus(),
+});
+
+export default connect(mapState, mapDispatch)(VerMenus);
