@@ -6,6 +6,8 @@ import encomendas from './encomendas';
 import atividades from './atividades';
 import palmocos from './palmocos';
 import menus from './menus';
+import entregas from './entregas';
+import contactos from './contactos'
 
 const models = {
   users,
@@ -14,7 +16,9 @@ const models = {
   encomendas,
   atividades,
   palmocos,
-  menus
+  menus,
+  entregas,
+  contactos
 }
 
 const store = init( { 

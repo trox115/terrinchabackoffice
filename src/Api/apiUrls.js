@@ -13,6 +13,10 @@ export const apiUrls = {
     palmocos:'/palmocos',
     // Menus de degustação
     menus: '/degustacao',
+    // Entregas
+    entregas: '/entregas',
+    // Contactos
+    contactos: '/contactos'
   };
   
   export const replaceUrls = (url, obj) => {

@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-function ProdutosParaEntrega({menus, getMenus}) {
+function ProdutosParaEntrega({entregas, getEntregas}) {
 
   useEffect(() => {
-    if(_.isEmpty(menus.menus)){
-      getMenus();
+    if(_.isEmpty(entregas.entregas)){
+      getEntregas();
     }
-    console.log(menus)
-  }, [menus, getMenus]);
+    console.log(entregas)
+  }, [entregas, getEntregas]);
     return (
         <div className="page-content-wrapper">
       <div className="page-content">
@@ -54,14 +54,22 @@ function ProdutosParaEntrega({menus, getMenus}) {
                       </tr>
                     </thead>
                     <tbody>
-                    <tr className="odd gradeX">
+                      {
+                        _.map(entregas.entregas, (produto, index) => {
+                      return(<tr className="odd gradeX">
                         <td className="user-circle-img">
                           <img src="assets/img/user/user1.jpg" alt="" />
                         </td>
-                        <td className="center">1</td>
-                        <td className="center">Sandwich Club</td>
-                        <td className="center">Alface, Tomate, Ovo Estrelado, Fiambre, Queijo. Batata Frita</td>
-                        <td className="center">7 €</td>
+                        <td className="center">{index}</td>
+                        <td className="center">{produto.nome}</td>
+                        <td className="center">{
+                          _.map(produto.ingredientes, (ingrediente) => {
+                            return(
+                              <span>{ingrediente},</span>
+                            )
+                          })
+                        }</td>
+                        <td className="center">{produto.preco} €</td>
 
                         <td className="center">
                           <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
@@ -71,45 +79,9 @@ function ProdutosParaEntrega({menus, getMenus}) {
                             <i className="fa fa-trash-o "></i>
                           </button>
                         </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">2</td>
-                        <td className="center">Sandwich Atum</td>
-                        <td className="center">Alface, Tomate, Pasta de Atum, Milho, Ovo Cozido. Batata Frita</td>
-                        <td className="center">7 €</td>
-
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="odd gradeX">
-                        <td className="user-circle-img">
-                          <img src="assets/img/user/user1.jpg" alt="" />
-                        </td>
-                        <td className="center">3</td>
-                        <td className="center">Sandwich do Campo</td>
-                        <td className="center">Alface, Tomate, Bife de Frango Grelhado, Milho, Ovo Cozido. Batata Frita</td>
-                        <td className="center">7 €</td>
-
-                        <td className="center">
-                          <a href="edit_booking.html" className="btn btn-tbl-edit btn-xs">
-                            <i className="fa fa-pencil"></i>
-                          </a>
-                          <button className="btn btn-tbl-delete btn-xs">
-                            <i className="fa fa-trash-o "></i>
-                          </button>
-                        </td>
-                      </tr>
-                     
-                      
+                      </tr>)
+                        } )
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -123,11 +95,11 @@ function ProdutosParaEntrega({menus, getMenus}) {
 }
 
 const mapState = (state) => ({
-  menus: state.menus,
+  entregas: state.entregas,
 });
 
 const mapDispatch = dispatch => ({
-  getMenus: () => dispatch.menus.loadMenus(),
+  getEntregas: () => dispatch.entregas.loadEntregas(),
 });
 
 export default connect(mapState, mapDispatch)(ProdutosParaEntrega);
