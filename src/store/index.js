@@ -1,10 +1,12 @@
 import { init } from '@rematch/core';
 import users from './users';
-import casas from './casas'
+import casas from './casas';
+import produtos from './produtos'
 
 const models = {
   users,
-  casas
+  casas,
+  produtos
 }
 
 const store = init( { 
